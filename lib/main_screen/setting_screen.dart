@@ -149,23 +149,17 @@ class _SettingScreenState extends State<SettingScreen> {
                   child: Column(
                     children: [
                       settingItem(Icons.qr_code, "Quét QR Code", () {
-                        print("Quet ma QR");
                       }),
                       settingItem(Icons.fingerprint, "Check In", () {
-                        print("check in");
                       }),
                       settingItem(Icons.lock, "Đổi mật khẩu", () {
-                        print("check in 2");
                       }),
                       settingItem(Icons.language, "Đổi ngôn ngữ", () {
-                        print("check in 3");
                       }),
                       settingItem(Icons.settings, "Thiết lập tài khoản", () {
-                        print("check in 4");
                       }),
                       settingItemSwitch(Icons.face, "Xac thuc face id"),
                       settingItem(Icons.support_agent, "Hỗ trợ", () {
-                        print("check in 5");
                       }),
                       settingItem(Icons.info, "Phiên bản: 10.1", () {
                         supportDialog(context);
@@ -237,7 +231,6 @@ class _SettingScreenState extends State<SettingScreen> {
                   setState(() {
                     faceIdEnabled = v;
                   });
-                  print(faceIdEnabled);
                 },
               ),
             ),

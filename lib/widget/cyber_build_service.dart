@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cyber_app/widget/cyber_icon.dart';
+import 'package:flutter_cyber_app/widget/cyber_icon_menu.dart';
 
 class CyberBuildService extends StatelessWidget {
   final List<Map<String, dynamic>> items;
@@ -18,7 +18,7 @@ class CyberBuildService extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         final item = items[index];
-        return CyberIcon(
+        return CyberIconMenu(
           backgroundColor: item["color"] as Color,
           icon: item["icon"] as IconData,
           name: item["name"] as String,

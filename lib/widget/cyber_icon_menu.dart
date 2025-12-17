@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CyberIcon extends StatelessWidget {
+class CyberIconMenu extends StatelessWidget {
   final Color backgroundColor;
   final IconData icon;
   final String name;
   final VoidCallback onPressed;
 
-  const CyberIcon({
+  const CyberIconMenu({
     super.key,
     required this.backgroundColor,
     required this.icon,

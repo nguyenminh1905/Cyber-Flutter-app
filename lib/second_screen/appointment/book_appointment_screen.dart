@@ -38,7 +38,6 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
-        child: const Icon(Icons.add),
         shape: const CircleBorder(),
         onPressed: () {
           Navigator.push(
@@ -46,6 +45,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
             MaterialPageRoute(builder: (context) => CreateAppointmentScreen()),
           );
         },
+        child: const Icon(Icons.add),
       ),
       body: Center(
         child: Text("Something")),

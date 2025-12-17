@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Controller quản lý các icon đã được đặt
 class CyberIconController extends ChangeNotifier {
   final List<PlacedIcon> _icons = [];
 

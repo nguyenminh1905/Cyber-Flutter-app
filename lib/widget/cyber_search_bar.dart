@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CyberSearchBar extends StatelessWidget {
+  const CyberSearchBar({super.key});
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
       child: TextField(

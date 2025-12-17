@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cyber_app/second_screen/drawicon/draw_icon_controller.dart';
-import 'package:flutter_cyber_app/second_screen/drawicon/draw_icon_widget.dart';
+import 'cyber_icon.dart';
+import 'draw_icon_controller.dart';
+import 'draw_icon_widget.dart';
 
 class DrawIconScreen extends StatefulWidget {
   const DrawIconScreen({super.key});
@@ -11,14 +12,18 @@ class DrawIconScreen extends StatefulWidget {
 
 class _DrawIconScreenState extends State<DrawIconScreen> {
   final controller = CyberIconController();
-  Map<String, dynamic>? selectedIcon;
-  List<Map<String, dynamic>> listIcons = const [
-    {"icon": Icons.home, "color": Colors.green},
-    {"icon": Icons.star, "color": Colors.orange},
-    {"icon": Icons.settings, "color": Colors.blue},
-    {"icon": Icons.person, "color": Colors.pink},
-    {"icon": Icons.donut_small, "color": Colors.yellow},
-    {"icon": Icons.alarm, "color": Colors.red},
+
+  /// ICON ĐANG ĐƯỢC CHỌN
+  PlacedIcon? selectedIcon;
+
+  /// ICON PICKER
+  final List<PlacedIcon> listIcons = [
+    PlacedIcon(icon: Icons.home, color: Colors.green, position: Offset.zero),
+    PlacedIcon(icon: Icons.star, color: Colors.orange, position: Offset.zero),
+    PlacedIcon(icon: Icons.settings, color: Colors.blue, position: Offset.zero),
+    PlacedIcon(icon: Icons.person, color: Colors.pink, position: Offset.zero),
+    PlacedIcon(icon: Icons.donut_small, color: Colors.yellow, position: Offset.zero),
+    PlacedIcon(icon: Icons.alarm, color: Colors.red, position: Offset.zero),
   ];
 
   @override
@@ -33,19 +38,16 @@ class _DrawIconScreenState extends State<DrawIconScreen> {
       appBar: AppBar(title: const Text("Test")),
       body: Column(
         children: [
-          /// ICON PICKER
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: listIcons.map((item) {
-              return GestureDetector(
+              return CyberIcon(
+                icon: item,
                 onTap: () => selectedIcon = item,
-                child: CircleAvatar(
-                  backgroundColor: item["color"] as Color,
-                  child: Icon(item["icon"] as IconData, color: Colors.white),
-                ),
               );
             }).toList(),
           ),
+
           const SizedBox(height: 20),
 
           /// IMAGE + ICON LAYER
@@ -59,10 +61,11 @@ class _DrawIconScreenState extends State<DrawIconScreen> {
                     behavior: HitTestBehavior.opaque,
                     onTapDown: (d) {
                       if (selectedIcon == null) return;
+
                       controller.add(
                         PlacedIcon(
-                          icon: selectedIcon!["icon"],
-                          color: selectedIcon!["color"],
+                          icon: selectedIcon!.icon,
+                          color: selectedIcon!.color,
                           position: d.localPosition,
                         ),
                       );
@@ -70,13 +73,12 @@ class _DrawIconScreenState extends State<DrawIconScreen> {
                     child: Image.asset(
                       "assets/images/Audi_A8L.png",
                       fit: BoxFit.cover,
-                      // QUAN TRỌNG
-                      width: double.infinity,
-                      height: double.infinity,
                     ),
                   ),
                 ),
-                Positioned.fill(child: CyberIconLayer(controller: controller)),
+                Positioned.fill(
+                  child: CyberIconLayer(controller: controller),
+                ),
               ],
             ),
           ),
