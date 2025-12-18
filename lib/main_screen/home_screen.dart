@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_cyber_app/second_screen/appointment/book_appointment_screen.dart';
-import 'package:flutter_cyber_app/second_screen/catalog/car_catalog_screen.dart';
-import 'package:flutter_cyber_app/second_screen/drawicon/draw_icon_screen.dart';
-import 'package:flutter_cyber_app/second_screen/khachhang/khach_hang_screen.dart';
-import 'package:flutter_cyber_app/second_screen/biometric_screen.dart';
-import 'package:flutter_cyber_app/second_screen/test_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/appointment/book_appointment_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/catalog/car_catalog_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/drawicon/draw_icon_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/face_regconition/fr_main_menu_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/khachhang/khach_hang_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/biometric/biometric_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/test_screen.dart';
 import 'package:flutter_cyber_app/widget/cyber_build_service.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -52,9 +53,9 @@ class _HomeTabState extends State<HomeScreen> {
     },
     {
       "color": Colors.brown,
-      "icon": Icons.car_crash,
-      "name": "Hợp đồng",
-      "screen": TestScreen(),
+      "icon": Icons.face,
+      "name": "Nhan dang khuon mat",
+      "screen": FrMainMenuScreen(),
     },
     {
       "color": Colors.yellow,

@@ -31,7 +31,6 @@ class CyberIconMenu extends StatelessWidget {
             child: Center(child: Icon(icon, color: Colors.white, size: 30)),
           ),
         ),
-        SizedBox(height: 6),
         Expanded(
           child: SizedBox(
             width: 100,

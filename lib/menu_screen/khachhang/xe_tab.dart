@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cyber_app/providers/car_provider.dart';
-import 'package:flutter_cyber_app/second_screen/khachhang/chon_xe_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/khachhang/chon_xe_screen.dart';
 import 'package:flutter_cyber_app/widget/cyber_custom_slidable.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';

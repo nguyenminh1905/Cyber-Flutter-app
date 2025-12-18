@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cyber_app/second_screen/khachhang/khach_hang_tab.dart';
-import 'package:flutter_cyber_app/second_screen/khachhang/thongtin_tab.dart';
-import 'package:flutter_cyber_app/second_screen/khachhang/xe_tab.dart';
+import 'package:flutter_cyber_app/menu_screen/khachhang/khach_hang_tab.dart';
+import 'package:flutter_cyber_app/menu_screen/khachhang/thongtin_tab.dart';
+import 'package:flutter_cyber_app/menu_screen/khachhang/xe_tab.dart';
 
 
 class KhachHangScreen extends StatelessWidget {

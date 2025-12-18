@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cyber_app/second_screen/drawicon/draw_icon_controller.dart';
+import 'package:flutter_cyber_app/menu_screen/drawicon/draw_icon_controller.dart';
 
 // widget de ve 1 icon
 class CyberIcon extends StatelessWidget{

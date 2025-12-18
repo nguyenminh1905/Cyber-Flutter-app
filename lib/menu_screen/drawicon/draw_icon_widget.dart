@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cyber_app/second_screen/drawicon/cyber_icon.dart';
-import 'package:flutter_cyber_app/second_screen/drawicon/draw_icon_controller.dart';
+import 'package:flutter_cyber_app/menu_screen/drawicon/cyber_icon.dart';
+import 'package:flutter_cyber_app/menu_screen/drawicon/draw_icon_controller.dart';
 
 /// Lớp hiển thị các icon đã được đặt lên canvas
 class CyberIconLayer extends StatelessWidget {
