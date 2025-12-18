@@ -12,11 +12,9 @@ class DrawIconScreen extends StatefulWidget {
 
 class _DrawIconScreenState extends State<DrawIconScreen> {
   final controller = CyberIconController();
-
-  /// ICON ĐANG ĐƯỢC CHỌN
+  /// Icon được chọn để đặt lên ảnh
   PlacedIcon? selectedIcon;
-
-  /// ICON PICKER
+  // Danh sách các icon có thể chọn để đặt lên ảnh
   final List<PlacedIcon> listIcons = [
     PlacedIcon(icon: Icons.home, color: Colors.green, position: Offset.zero),
     PlacedIcon(icon: Icons.star, color: Colors.orange, position: Offset.zero),
@@ -25,13 +23,11 @@ class _DrawIconScreenState extends State<DrawIconScreen> {
     PlacedIcon(icon: Icons.donut_small, color: Colors.yellow, position: Offset.zero),
     PlacedIcon(icon: Icons.alarm, color: Colors.red, position: Offset.zero),
   ];
-
   @override
   void initState() {
     super.initState();
     controller.load();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,9 +43,7 @@ class _DrawIconScreenState extends State<DrawIconScreen> {
               );
             }).toList(),
           ),
-
           const SizedBox(height: 20),
-
           /// IMAGE + ICON LAYER
           SizedBox(
             height: 300,
@@ -82,7 +76,6 @@ class _DrawIconScreenState extends State<DrawIconScreen> {
               ],
             ),
           ),
-
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16),

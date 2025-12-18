@@ -44,14 +44,18 @@ class PlacedIcon {
 
   PlacedIcon({required this.icon, required this.color, required this.position});
 
-  Map<String, dynamic> toJson() => {
-    "icon": icon.codePoint,
-    "fontFamily": icon.fontFamily,
-    "color": color.value,
-    "dx": position.dx,
-    "dy": position.dy,
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> json = {};
 
+    json["icon"] = icon.codePoint;
+    json["fontFamily"] = icon.fontFamily;
+    json["color"] = color.value;
+    json["dx"] = position.dx;
+    json["dy"] = position.dy;
+
+    return json;
+  }
+  // constructor tao tu json, factory tra ve gia tri tu json
   factory PlacedIcon.fromJson(Map<String, dynamic> json) {
     return PlacedIcon(
       icon: IconData(json["icon"], fontFamily: json["fontFamily"]),

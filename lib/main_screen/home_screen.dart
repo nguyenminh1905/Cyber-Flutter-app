@@ -4,6 +4,7 @@ import 'package:flutter_cyber_app/second_screen/appointment/book_appointment_scr
 import 'package:flutter_cyber_app/second_screen/catalog/car_catalog_screen.dart';
 import 'package:flutter_cyber_app/second_screen/drawicon/draw_icon_screen.dart';
 import 'package:flutter_cyber_app/second_screen/khachhang/khach_hang_screen.dart';
+import 'package:flutter_cyber_app/second_screen/biometric_screen.dart';
 import 'package:flutter_cyber_app/second_screen/test_screen.dart';
 import 'package:flutter_cyber_app/widget/cyber_build_service.dart';
 
@@ -45,9 +46,9 @@ class _HomeTabState extends State<HomeScreen> {
     },
     {
       "color": Colors.deepOrange,
-      "icon": Icons.receipt,
-      "name": "Báo giá",
-      "screen": TestScreen(),
+      "icon": Icons.fingerprint,
+      "name": "Biometric",
+      "screen": BiometricTest(),
     },
     {
       "color": Colors.brown,
