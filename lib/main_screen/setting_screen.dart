@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cyber_app/widget/cyber_custom_button.dart';
 
 class SettingScreen extends StatefulWidget {
+  const SettingScreen({super.key});
+
   @override
   State<SettingScreen> createState() => _SettingScreenState();
 }

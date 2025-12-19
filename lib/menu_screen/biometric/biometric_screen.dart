@@ -9,11 +9,13 @@ class BiometricTest extends StatelessWidget {
 
     try {
       //Kiểm tra thiết bị có hỗ trợ sinh trắc học không
-      final canAuthenticate = await auth.canCheckBiometrics ||
-          await auth.isDeviceSupported();
+      final canAuthenticate =
+          await auth.canCheckBiometrics || await auth.isDeviceSupported();
 
       if (!canAuthenticate) {
-        _showDialog(context, "Thiết bị không hỗ trợ sinh trắc học");
+        if (context.mounted) {
+          _showDialog(context, "Thiết bị không hỗ trợ sinh trắc học");
+        }
         return;
       }
 
@@ -25,11 +27,12 @@ class BiometricTest extends StatelessWidget {
           stickyAuth: true,
         ),
       );
-
-      if (isAuthenticated) {
-        _showDialog(context, "Xác thực thành công");
-      } else {
-        _showDialog(context, "Xác thực thất bại");
+      if (context.mounted) {
+        if (isAuthenticated) {
+          _showDialog(context, "Xác thực thành công");
+        } else {
+          _showDialog(context, "Xác thực thất bại");
+        }
       }
     } catch (e) {
       _showDialog(context, "Lỗi: $e");

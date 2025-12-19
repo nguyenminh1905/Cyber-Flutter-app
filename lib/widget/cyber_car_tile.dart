@@ -21,7 +21,7 @@ class CarTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.green.withOpacity(0.15) : Colors.white,
+          color: isSelected ? Colors.green.withValues(alpha: 0.15) : Colors.white,
           border: Border.all(
             color: isSelected ? Colors.green : Colors.grey.shade300,
           ),
