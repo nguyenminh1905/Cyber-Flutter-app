@@ -6,69 +6,75 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'face_service.dart';
 
 class RegisterFace extends StatefulWidget {
-  const RegisterFace({super.key});
+  final File image;
+
+  const RegisterFace({super.key, required this.image});
 
   @override
   State<RegisterFace> createState() => _RegisterFaceState();
 }
 
 class _RegisterFaceState extends State<RegisterFace> {
-  final picker = ImagePicker();
-  File? _image;
-  bool _loading = false;
+  bool _loading = true;
   String _status = "";
 
-  Future<void> _pick(ImageSource source) async {
-    final picked = await picker.pickImage(source: source);
-    if (picked == null) return;
+  @override
+  void initState() {
+    super.initState();
+    _register();
+  }
 
-    setState(() {
-      _image = File(picked.path);
-      _loading = true;
-      _status = "";
-    });
-
-    final embedding =
-        await FaceService.instance.extractEmbedding(_image!);
-
-    _loading = false;
+  Future<void> _register() async {
+    final embedding = await FaceService.instance.extractEmbedding(widget.image);
 
     if (embedding == null) {
-      setState(() => _status = "Ảnh không hợp lệ (chỉ 1 khuôn mặt)");
+      setState(() {
+        _status = "❌ Ảnh không hợp lệ (chỉ 1 khuôn mặt)";
+        _loading = false;
+      });
       return;
     }
 
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("face_embedding", jsonEncode(embedding));
 
-    setState(() => _status = "Đăng ký thành công ✅");
+    setState(() {
+      _status = "✅ Đăng ký thành công";
+      _loading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Đăng ký khuôn mặt")),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (_image != null)
-            Image.file(_image!, height: 200),
-          if (_loading)
-            const Padding(
-              padding: EdgeInsets.all(12),
-              child: CircularProgressIndicator(),
-            ),
-          ElevatedButton(
-            onPressed: () => _pick(ImageSource.camera),
-            child: const Text("Chụp ảnh"),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 400,
+                child: Image.file(widget.image, fit: BoxFit.contain),
+              ),
+              if (_loading)
+                const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: CircularProgressIndicator(),
+                ),
+              const SizedBox(height: 12),
+              Text(
+                _status,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: _status.contains("❌") ? Colors.red : Colors.green,
+                ),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () => _pick(ImageSource.gallery),
-            child: const Text("Chọn ảnh"),
-          ),
-          const SizedBox(height: 20),
-          Text(_status),
-        ],
+        ),
       ),
     );
   }

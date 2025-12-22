@@ -13,14 +13,13 @@ class FaceService {
   FaceDetector? _detector;
   bool _loading = false;
 
-  /// ================= LOAD =================
   Future<void> _ensureLoaded() async {
     if (_interpreter != null && _detector != null) return;
 
     if (_loading) {
       while (_interpreter == null) {
         await Future.delayed(const Duration(milliseconds: 50));
-      } 
+      }
       return;
     }
 
@@ -40,7 +39,6 @@ class FaceService {
     _loading = false;
   }
 
-  /// ================= IMAGE → FLOAT =================
   Float32List _imageToFloat32(img.Image image) {
     final buffer = Float32List(160 * 160 * 3);
     int i = 0;
@@ -48,7 +46,6 @@ class FaceService {
     for (int y = 0; y < 160; y++) {
       for (int x = 0; x < 160; x++) {
         final p = image.getPixel(x, y);
-
         buffer[i++] = (p.r - 127.5) / 128.0;
         buffer[i++] = (p.g - 127.5) / 128.0;
         buffer[i++] = (p.b - 127.5) / 128.0;
@@ -57,7 +54,6 @@ class FaceService {
     return buffer;
   }
 
-  /// ================= EXTRACT =================
   Future<List<double>?> extractEmbedding(File file) async {
     await _ensureLoaded();
 
@@ -75,19 +71,10 @@ class FaceService {
     final w = min(box.width.toInt(), original.width - x);
     final h = min(box.height.toInt(), original.height - y);
 
-    final cropped = img.copyCrop(
-      original,
-      x: x,
-      y: y,
-      width: w,
-      height: h,
-    );
+    final cropped =
+        img.copyCrop(original, x: x, y: y, width: w, height: h);
 
-    final resized = img.copyResize(
-      cropped,
-      width: 160,
-      height: 160,
-    );
+    final resized = img.copyResize(cropped, width: 160, height: 160);
 
     final input = _imageToFloat32(resized).reshape([1, 160, 160, 3]);
     final output = Float32List(512).reshape([1, 512]);
@@ -97,7 +84,6 @@ class FaceService {
     return List<double>.from(output[0]);
   }
 
-  /// ================= COSINE =================
   double cosineSimilarity(List<double> a, List<double> b) {
     double dot = 0, na = 0, nb = 0;
     for (int i = 0; i < a.length; i++) {
@@ -106,10 +92,5 @@ class FaceService {
       nb += b[i] * b[i];
     }
     return dot / (sqrt(na) * sqrt(nb));
-  }
-
-  Future<void> dispose() async {
-    await _detector?.close();
-    _interpreter?.close();
   }
 }

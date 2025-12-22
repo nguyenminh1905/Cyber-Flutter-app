@@ -1,9 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_cyber_app/nav/main_navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_cyber_app/providers/car_provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(ChangeNotifierProvider(
       create: (_) => CarProvider(),
       child: MyApp(),
