@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cyber_app/menu_screen/face_regconition/face_service.dart';
-import 'package:flutter_cyber_app/menu_screen/test_screen.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,9 +18,15 @@ class _KYCCameraScreenState extends State<KYCCameraScreen> {
   CameraController? _controller;
   FaceDetector? _detector;
 
+  // running trạng thái camera
   bool _running = true;
+
+  // capture trạng thái chụp ảnh
   bool _capturing = false;
+
+  // verifying trạng thái xác thực
   bool _verifying = false;
+
 
   @override
   void initState() {
@@ -64,32 +69,34 @@ class _KYCCameraScreenState extends State<KYCCameraScreen> {
 
     _capturing = true;
 
-    try {
-      final xfile = await _controller!.takePicture();
-      final file = File(xfile.path);
+    final xfile = await _controller!.takePicture();
+    final file = File(xfile.path);
 
-      final input = InputImage.fromFilePath(file.path);
-      final faces = await _detector!.processImage(input);
+    final input = InputImage.fromFilePath(file.path);
+    final faces = await _detector!.processImage(input);
 
-      if (faces.isEmpty) return;
+    if (faces.isEmpty) return;
 
-      _verifying = true;
-      await _verifyFace(file);
-    } catch (e) {
-      debugPrint("KYC error: $e");
-    } finally {
-      _capturing = false;
-      _verifying = false;
-    }
+    _verifying = true;
+    await _verifyFace(file);
+
+    _capturing = false;
+    _verifying = false;
   }
 
   Future<void> _verifyFace(File image) async {
     final prefs = await SharedPreferences.getInstance();
     final saved = prefs.getString("face_embedding");
 
+    // FREEZE camera ngay khi bắt đầu xử lý kết quả
+    _running = false;
+
     if (saved == null) {
-      _running = false;
-      Navigator.pop(context, "NO_REGISTER");
+      _showDialog(
+        "Chưa đăng ký",
+        "Vui lòng đăng ký khuôn mặt trước",
+        stop: true,
+      );
       return;
     }
 
@@ -98,18 +105,47 @@ class _KYCCameraScreenState extends State<KYCCameraScreen> {
 
     final sim = FaceService.instance.cosineSimilarity(registered, current);
 
-    _running = false;
-
     if (!mounted) return;
 
     if (sim > 0.7) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const TestScreen()),
+      _showDialog(
+        "Thành công",
+        "Xác thực thành công",
+        stop: true, // OK → thoát
       );
     } else {
-      Navigator.pop(context, "FAIL");
+      _showDialog(
+        "Thất bại",
+        "Khuôn mặt không khớp",
+        stop: false, // OK → chụp lại
+      );
     }
+  }
+
+  void _showDialog(String title, String msg, {required bool stop}) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+        title: Text(title),
+        content: Text(msg),
+        actions: [
+          TextButton(
+            child: const Text("OK"),
+            onPressed: () {
+              Navigator.pop(context);
+              if (stop) {
+                Navigator.pop(context); // thoát màn chấm công
+              } else {
+                // RESUME camera sau khi user bấm OK
+                _running = true;
+                _loop();
+              }
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   @override

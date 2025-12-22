@@ -22,7 +22,7 @@ class FaceService {
       }
       return;
     }
-
+    
     _loading = true;
 
     _interpreter = await Interpreter.fromAsset(
@@ -71,8 +71,7 @@ class FaceService {
     final w = min(box.width.toInt(), original.width - x);
     final h = min(box.height.toInt(), original.height - y);
 
-    final cropped =
-        img.copyCrop(original, x: x, y: y, width: w, height: h);
+    final cropped = img.copyCrop(original, x: x, y: y, width: w, height: h);
 
     final resized = img.copyResize(cropped, width: 160, height: 160);
 

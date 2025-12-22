@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cyber_app/menu_screen/appointment/book_appointment_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/catalog/car_catalog_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/drawicon/draw_icon_screen.dart';
-import 'package:flutter_cyber_app/menu_screen/face_regconition/fr_main_menu_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/face_regconition/cham_cong/face_camera_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/face_regconition/dangki_khuonmat/register_face_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/khachhang/khach_hang_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/biometric/biometric_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/test_screen.dart';
@@ -52,16 +53,16 @@ class _HomeTabState extends State<HomeScreen> {
       "screen": BiometricTest(),
     },
     {
-      "color": Colors.brown,
+      "color": Colors.yellow,
       "icon": Icons.face,
-      "name": "Nhan dang khuon mat",
-      "screen": FrMainMenuScreen(),
+      "name": "Dang ki khuon mat",
+      "screen": RegisterFaceScreen(),
     },
     {
-      "color": Colors.yellow,
-      "icon": Icons.qr_code,
-      "name": "NFC",
-      "screen": TestScreen(),
+      "color": Colors.brown,
+      "icon": Icons.verified_user,
+      "name": "Cham cong",
+      "screen": KYCCameraScreen(),
     },
     {
       "color": Colors.red,
