@@ -22,7 +22,7 @@ class FaceService {
       }
       return;
     }
-    
+
     _loading = true;
 
     _interpreter = await Interpreter.fromAsset(
@@ -31,14 +31,13 @@ class FaceService {
     );
 
     _detector = FaceDetector(
-      options: FaceDetectorOptions(
-        performanceMode: FaceDetectorMode.fast,
-      ),
+      options: FaceDetectorOptions(performanceMode: FaceDetectorMode.fast),
     );
 
     _loading = false;
   }
 
+  //convert image to Float32List
   Float32List _imageToFloat32(img.Image image) {
     final buffer = Float32List(160 * 160 * 3);
     int i = 0;
@@ -54,6 +53,7 @@ class FaceService {
     return buffer;
   }
 
+  //ham lay vector nhung 1 khuon mat
   Future<List<double>?> extractEmbedding(File file) async {
     await _ensureLoaded();
 
@@ -70,6 +70,34 @@ class FaceService {
     final y = max(0, box.top.toInt());
     final w = min(box.width.toInt(), original.width - x);
     final h = min(box.height.toInt(), original.height - y);
+
+    final cropped = img.copyCrop(original, x: x, y: y, width: w, height: h);
+
+    final resized = img.copyResize(cropped, width: 160, height: 160);
+
+    final input = _imageToFloat32(resized).reshape([1, 160, 160, 3]);
+    final output = Float32List(512).reshape([1, 512]);
+
+    _interpreter!.run(input, output);
+
+    return List<double>.from(output[0]);
+  }
+
+  //ham lay vector nhung nhieu khuon mat
+  Future<List<double>?> extractEmbeddingFromFace(File file, Face face) async {
+    await _ensureLoaded();
+
+    final original = img.decodeImage(file.readAsBytesSync());
+    if (original == null) return null;
+
+    final box = face.boundingBox;
+
+    final x = max(0, box.left.toInt());
+    final y = max(0, box.top.toInt());
+    final w = min(box.width.toInt(), original.width - x);
+    final h = min(box.height.toInt(), original.height - y);
+
+    if (w <= 0 || h <= 0) return null;
 
     final cropped = img.copyCrop(original, x: x, y: y, width: w, height: h);
 

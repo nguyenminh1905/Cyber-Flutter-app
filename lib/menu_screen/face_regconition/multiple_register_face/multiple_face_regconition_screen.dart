@@ -67,8 +67,8 @@ class _RecognizeMultiFaceScreenState extends State<RecognizeMultiFaceScreen> {
 
       List<String> found = [];
 
-      for (final _ in faces) {
-        final embed = await FaceService.instance.extractEmbedding(file);
+      for (final face in faces) {
+        final embed = await FaceService.instance.extractEmbeddingFromFace(file, face);
         if (embed == null) continue;
         double best = 0;
         String? name;
