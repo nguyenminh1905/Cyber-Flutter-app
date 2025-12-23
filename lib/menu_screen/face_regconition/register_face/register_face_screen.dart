@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_cyber_app/menu_screen/face_regconition/face_service.dart';
 import 'package:image_picker/image_picker.dart';
@@ -101,8 +100,11 @@ class _RegisterFaceScreenState extends State<RegisterFaceScreen> {
                     ? Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                          Icon(Icons.sentiment_dissatisfied,
-                              size: 80, color: Colors.grey),
+                          Icon(
+                            Icons.sentiment_dissatisfied,
+                            size: 80,
+                            color: Colors.grey,
+                          ),
                           SizedBox(height: 12),
                           Text(
                             "Chưa đăng ký khuôn mặt",
@@ -124,9 +126,7 @@ class _RegisterFaceScreenState extends State<RegisterFaceScreen> {
               _status,
               style: TextStyle(
                 fontSize: 15,
-                color: _status.contains("❌")
-                    ? Colors.red
-                    : Colors.green,
+                color: _status.contains("❌") ? Colors.red : Colors.green,
               ),
             ),
 

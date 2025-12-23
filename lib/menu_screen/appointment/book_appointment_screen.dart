@@ -35,7 +35,6 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
             onPressed: () => setState(() => isGrid = true),
           ),
         ],
-        
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,

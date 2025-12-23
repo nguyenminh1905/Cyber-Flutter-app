@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cyber_app/menu_screen/appointment/book_appointment_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/catalog/car_catalog_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/drawicon/draw_icon_screen.dart';
-import 'package:flutter_cyber_app/menu_screen/face_regconition/cham_cong/face_camera_screen.dart';
-import 'package:flutter_cyber_app/menu_screen/face_regconition/dangki_khuonmat/register_face_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/face_regconition/clock_in/face_camera_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/face_regconition/multiple_register_face/multiple_face_regconition_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/face_regconition/multiple_register_face/multiple_face_register_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/face_regconition/register_face/register_face_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/khachhang/khach_hang_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/biometric/biometric_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/test_screen.dart';
@@ -65,16 +67,16 @@ class _HomeTabState extends State<HomeScreen> {
       "screen": KYCCameraScreen(),
     },
     {
-      "color": Colors.red,
-      "icon": Icons.donut_large,
-      "name": "Test",
-      "screen": TestScreen(),
+      "color": Colors.blue,
+      "icon": Icons.people,
+      "name": "Dang ki nhieu khuon mat",
+      "screen": RegisterMultiFaceScreen(),
     },
     {
       "color": Colors.red,
-      "icon": Icons.donut_large,
-      "name": "Test",
-      "screen": TestScreen(),
+      "icon": Icons.camera_front,
+      "name": "Nhan dang nhieu khuon mat",
+      "screen": RecognizeMultiFaceScreen(),
     },
     {
       "color": Colors.red,
