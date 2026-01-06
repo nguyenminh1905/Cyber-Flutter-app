@@ -6,7 +6,9 @@ import 'package:flutter_cyber_app/menu_screen/drawicon/draw_icon_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/face_regconition/clock_in/face_camera_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/face_regconition/multiple_register_face/multiple_face_regconition_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/face_regconition/multiple_register_face/multiple_face_register_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/face_regconition/multiple_register_face/real_time_multiple_face_recognition_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/face_regconition/register_face/register_face_screen.dart';
+import 'package:flutter_cyber_app/menu_screen/id_recognition/id_camera_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/khachhang/khach_hang_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/biometric/biometric_screen.dart';
 import 'package:flutter_cyber_app/menu_screen/test_screen.dart';
@@ -79,16 +81,16 @@ class _HomeTabState extends State<HomeScreen> {
       "screen": RecognizeMultiFaceScreen(),
     },
     {
-      "color": Colors.red,
-      "icon": Icons.donut_large,
-      "name": "Test",
-      "screen": TestScreen(),
+      "color": Colors.orange,
+      "icon": Icons.camera,
+      "name": "RealTime face detection",
+      "screen": RealTimeRecognizeMultiFaceScreen(),
     },
     {
-      "color": Colors.red,
-      "icon": Icons.donut_large,
-      "name": "Test",
-      "screen": TestScreen(),
+      "color": Colors.pink,
+      "icon": Icons.account_box,
+      "name": "Doc the can cuoc",
+      "screen": ReadCCCDCardScreen(),
     },
     {
       "color": Colors.red,
