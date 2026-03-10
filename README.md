@@ -1,7 +1,5 @@
 # Flutter App
 
-App viết để học Flutter
-
 ## Getting Started
 This project is a starting point for a Flutter application.
 
